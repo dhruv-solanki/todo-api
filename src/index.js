@@ -2,6 +2,7 @@ import express from "express";
 import { config } from "dotenv";
 import { connectDB, disconnectDB } from "./config/db.js";
 import todoRouter from "./routes/todo.route.js";
+import authRouter from "./routes/auth.route.js";
 
 const app = express();
 const PORT = 8000;
@@ -9,6 +10,11 @@ const PORT = 8000;
 config();
 connectDB();
 
+// body parsing middlewares
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/auth", authRouter);
 app.use("/todo", todoRouter);
 
 app.get("/", (req, res) => {
