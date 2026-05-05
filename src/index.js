@@ -5,7 +5,7 @@ import todoRouter from "./routes/todo.route.js";
 import authRouter from "./routes/auth.route.js";
 
 const app = express();
-const PORT = 8000;
+const PORT = 8001;
 
 config();
 connectDB();

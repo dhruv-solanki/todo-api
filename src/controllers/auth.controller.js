@@ -43,7 +43,15 @@ const login = async (req, res) => {
     where: { email: email },
   });
 
-  if (!user || !isValidPassword(password, user.password)) {
+  if (!user) {
+    return res.status(401).json({
+      error: "Invalid email or password",
+    });
+  }
+
+  const valid = await isValidPassword(password, user.password);
+
+  if (!valid) {
     return res.status(401).json({
       error: "Invalid email or password",
     });
